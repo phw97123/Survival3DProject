@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
     public float minXLook;
     public float maxXLook;
     private float camCurXRot;
-    public float lookSensitivity;
+    public float lookSensitivity; // 시점 민감도
 
     private Vector2 mouseDelta;
 
@@ -62,7 +62,6 @@ public class PlayerController : MonoBehaviour
         _rigidbody.velocity = dir;
     }
 
-
     //마우스로 카메라 움직임
     void CameraLook()
     {
@@ -104,10 +103,10 @@ public class PlayerController : MonoBehaviour
     {
         Ray[] rays = new Ray[4]
         {
-            new Ray(transform.position + (transform.forward * 0.2f), Vector3.down),
-            new Ray(transform.position + (-transform.forward * 0.2f), Vector3.down),
-            new Ray(transform.position + (transform.right * 0.2f), Vector3.down),
-            new Ray(transform.position + (-transform.right * 0.2f), Vector3.down),
+            new Ray(transform.position + (transform.forward * 0.2f) + (Vector3.up * 0.01f), Vector3.down),
+            new Ray(transform.position + (-transform.forward * 0.2f)+ (Vector3.up * 0.01f), Vector3.down),
+            new Ray(transform.position + (transform.right * 0.2f)+ (Vector3.up * 0.01f), Vector3.down),
+            new Ray(transform.position + (-transform.right * 0.2f)+ (Vector3.up * 0.01f), Vector3.down),
         };
 
         for (int i = 0; i < rays.Length; i++) 
@@ -124,9 +123,9 @@ public class PlayerController : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawRay(transform.position + (transform.forward * 0.2f) + (Vector3.up * 0.01f), Vector3.down);
-        Gizmos.DrawRay(transform.position + (-transform.forward * 0.2f) + (Vector3.up * 0.01f), Vector3.down);
-        Gizmos.DrawRay(transform.position + (transform.right * 0.2f) + (Vector3.up * 0.01f), Vector3.down);
-        Gizmos.DrawRay(transform.position + (-transform.right * 0.2f) + (Vector3.up * 0.01f), Vector3.down);
+        Gizmos.DrawRay(transform.position + (transform.forward * 0.2f) , Vector3.down);
+        Gizmos.DrawRay(transform.position + (-transform.forward * 0.2f), Vector3.down);
+        Gizmos.DrawRay(transform.position + (transform.right * 0.2f) , Vector3.down);
+        Gizmos.DrawRay(transform.position + (-transform.right * 0.2f) , Vector3.down);
     }
 }
